@@ -2,6 +2,11 @@
 Changelog for package turtlebot3_fake
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.3.7 (2025-06-27)
+------------------
+* Changed the header files in tf2/LinearMath from .h to .hpp
+* Contributors: Hyungyu Kim
+
 2.3.5 (2025-06-04)
 ------------------
 * None

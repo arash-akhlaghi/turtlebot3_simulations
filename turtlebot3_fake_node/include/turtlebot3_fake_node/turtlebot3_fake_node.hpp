@@ -17,7 +17,6 @@
 #ifndef TURTLEBOT3_FAKE_NODE__TURTLEBOT3_FAKE_NODE_HPP_
 #define TURTLEBOT3_FAKE_NODE__TURTLEBOT3_FAKE_NODE_HPP_
 
-#include <tf2/LinearMath/Quaternion.h>
 #include <chrono>
 
 #include <rclcpp/rclcpp.hpp>
@@ -25,6 +24,7 @@
 #include "geometry_msgs/msg/twist.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "sensor_msgs/msg/joint_state.hpp"
+#include <tf2/LinearMath/Quaternion.hpp>
 #include "tf2_msgs/msg/tf_message.hpp"
 #include "turtlebot3_msgs/msg/sensor_state.hpp"
 
