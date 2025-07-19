@@ -402,6 +402,15 @@
       <joint_name>wheel_left_joint</joint_name>
       <joint_name>wheel_right_joint</joint_name>
     </plugin>
+    <plugin
+  filename="gz-sim-pose-publisher-system"
+  name="gz::sim::systems::PosePublisher">
+  <publish_link_pose>true</publish_link_pose>
+  <use_pose_vector_msg>true</use_pose_vector_msg>
+  <static_publisher>true</static_publisher>
+  <static_update_frequency>1</static_update_frequency>
+  
+</plugin>
 
   </model>
 </sdf>
