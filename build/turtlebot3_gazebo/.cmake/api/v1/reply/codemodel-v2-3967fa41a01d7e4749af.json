@@ -1,0 +1,106 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-97bc99a5ad1d18a852b5.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.10.2"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "turtlebot3_gazebo",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "obstacle1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-obstacle1-46606a4a69992b70408a.json",
+					"name" : "obstacle1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "obstacle2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-obstacle2-ed208c7087cb609c7275.json",
+					"name" : "obstacle2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "obstacles::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-obstacles-ae4b60d34ef766b010c2.json",
+					"name" : "obstacles",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "turtlebot3_drive::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-turtlebot3_drive-1ad056da40b1b88a7339.json",
+					"name" : "turtlebot3_drive",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "turtlebot3_gazebo_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-turtlebot3_gazebo_uninstall-9523582ef38a6edf6df6.json",
+					"name" : "turtlebot3_gazebo_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-8db813795564ed3dbb56.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/neo/turtlebot3_ws/src/turtlebot3_simulations/build/turtlebot3_gazebo",
+		"source" : "/home/neo/turtlebot3_ws/src/turtlebot3_simulations/turtlebot3_gazebo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
