@@ -3,8 +3,10 @@
   <model name="gate3">
     <pose>-2.1 -5.6 0.5 0 0 0</pose>
     <static>true</static>
-    <link name="link_gate3">
+
+    <link name="link">
       <pose>0 0 0 0 0 0</pose>
+
       <collision name="collision">
         <geometry>
           <box>
@@ -12,6 +14,7 @@
           </box>
         </geometry>
       </collision>
+
       <visual name="visual">
         <geometry>
           <box>
@@ -21,21 +24,15 @@
       </visual>
     </link>
 
-    <!--
-      This plugin publishes the pose of the specified link to a ROS 2 topic.
-    -->
-    <plugin
-      filename="gz-sim-pose-publisher-system"
-      name="gz::sim::systems::PosePublisher">
-      <publish_link_pose>true</publish_link_pose>
-      <publish_visual_pose>false</publish_visual_pose>
-      <publish_collision_pose>false</publish_collision_pose>
-      <publish_sensor_pose>false</publish_sensor_pose>
-      <publish_nested_model_pose>false</publish_nested_model_pose>
-      <update_frequency>10</update_frequency> <!-- Publish rate in Hz -->
-      <link_name>link_gate3</link_name>
-      <topic>/gate3/pose</topic> <!-- The ROS 2 topic to publish on -->
-    </plugin>
+<plugin
+  filename="gz-sim-pose-publisher-system"
+  name="gz::sim::systems::PosePublisher">
+  <publish_link_pose>true</publish_link_pose>
+  <use_pose_vector_msg>true</use_pose_vector_msg>
+  <static_publisher>true</static_publisher>
+  <static_update_frequency>1</static_update_frequency>
+  <allow_static_publishing>true</allow_static_publishing> <!-- THIS is the key -->
+</plugin>
 
   </model>
 </sdf>
