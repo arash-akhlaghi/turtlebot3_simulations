@@ -24,9 +24,7 @@
       <collision name="base_collision">
         <pose>-0.032 0 0.070 0 0 0</pose>
         <geometry>
-          <box>
-            <size>0.14 0.14 0.14</size>
-          </box>
+          <box><size>0.14 0.14 0.14</size></box>
         </geometry>
       </collision>
 
@@ -66,10 +64,10 @@
       </sensor>
     </link>
 
-    <!-- Horizontal LIDAR -->
+    <!-- Horizontal LIDAR (2D) -->
     <link name="base_scan">
       <inertial>
-        <pose>-0.020 0 0.161 0 0 0</pose>
+        <pose>0 0 0 0 0 0</pose>
         <mass>0.114</mass>
         <inertia>
           <ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz>
@@ -77,16 +75,13 @@
         </inertia>
       </inertial>
       <collision name="lidar_sensor_collision">
-        <pose>-0.020 0 0.161 0 0 0</pose>
+        <pose>0 0 0 0 0 0</pose>
         <geometry>
-          <cylinder>
-            <radius>0.0508</radius>
-            <length>0.055</length>
-          </cylinder>
+          <cylinder><radius>0.0508</radius><length>0.055</length></cylinder>
         </geometry>
       </collision>
       <visual name="lidar_sensor_visual">
-        <pose>-0.032 0 0.171 0 0 0</pose>
+        <pose>0 0 0.01 0 0 0</pose>
         <geometry>
           <mesh>
             <uri>model://turtlebot3_common/meshes/sensors/lds.stl</uri>
@@ -110,8 +105,8 @@
             <horizontal>
               <samples>360</samples>
               <resolution>1</resolution>
-              <min_angle>0</min_angle>
-              <max_angle>6.28</max_angle>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle> 3.14159265</max_angle>
             </horizontal>
           </scan>
           <range>
@@ -120,17 +115,14 @@
             <resolution>0.015</resolution>
           </range>
           <noise>
-            <type>gaussian</type>
-            <mean>0</mean>
-            <stddev>0.01</stddev>
+            <type>gaussian</type><mean>0</mean><stddev>0.01</stddev>
           </noise>
         </lidar>
       </sensor>
     </link>
 
-    <!-- Vertical LIDAR -->
+    <!-- 3D LIDAR -->
     <link name="vertical_scan">
-      <pose>0 0 0.171 0 0 0</pose>
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.05</mass>
@@ -139,7 +131,6 @@
           <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
         </inertia>
       </inertial>
-      <!-- Collision removed to prevent conflicts -->
       <visual name="vertical_lidar_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
@@ -156,22 +147,22 @@
       <sensor name="vertical_lidar_sensor" type="gpu_lidar">
         <always_on>true</always_on>
         <visualize>true</visualize>
-        <!-- Rotate around Y for vertical scan -->
-        <pose>0 0 0 0 1.5708 0</pose>
+        <pose>0 0 0 0 0 0</pose>
         <update_rate>5</update_rate>
         <topic>vertical_scan</topic>
         <gz_frame_id>vertical_scan</gz_frame_id>
         <lidar>
           <scan>
             <horizontal>
-              <samples>20</samples>
-              <min_angle>-1.57</min_angle>
-              <max_angle>1.57</max_angle>
+              <samples>360</samples>
+              <min_angle>-3.14159265</min_angle>
+              <max_angle> 3.14159265</max_angle>
             </horizontal>
             <vertical>
-              <samples>180</samples>
-              <min_angle>0</min_angle>
-              <max_angle>6.28</max_angle>
+              <!-- Example: +/-30 degrees with 32 channels -->
+              <samples>32</samples>
+              <min_angle>-0.523599</min_angle>
+              <max_angle> 0.523599</max_angle>
             </vertical>
           </scan>
           <range>
@@ -180,9 +171,7 @@
             <resolution>0.015</resolution>
           </range>
           <noise>
-            <type>gaussian</type>
-            <mean>0</mean>
-            <stddev>0.01</stddev>
+            <type>gaussian</type><mean>0</mean><stddev>0.01</stddev>
           </noise>
         </lidar>
       </sensor>
@@ -195,18 +184,26 @@
       <pose>0 0 0.171 0 0 0</pose>
     </joint>
 
+    <!-- Attach the 2D lidar to the base -->
+    <joint name="base_scan_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>base_scan</child>
+      <pose>-0.020 0 0.161 0 0 0</pose>
+    </joint>
+
     <!-- Wheels and caster links -->
     <link name="wheel_left_link">
       <inertial>
         <pose>0 0.08 0.023 -1.57 0 0</pose>
         <mass>0.1</mass>
-        <inertia><ixx>5.445e-05</ixx><iyy>5.445e-05</iyy><izz>1.089e-04</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        <inertia>
+          <ixx>5.445e-05</ixx><iyy>5.445e-05</iyy><izz>1.089e-04</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
       </inertial>
       <collision name="wheel_left_collision">
         <pose>0 0.08 0.023 -1.57 0 0</pose>
-        <geometry>
-          <cylinder><radius>0.033</radius><length>0.018</length></cylinder>
-        </geometry>
+        <geometry><cylinder><radius>0.033</radius><length>0.018</length></cylinder></geometry>
         <surface>
           <friction><ode><mu>100000</mu><mu2>100000</mu2></ode></friction>
           <contact><ode><kp>1e5</kp><kd>1</kd></ode></contact>
@@ -214,7 +211,9 @@
       </collision>
       <visual name="wheel_left_visual">
         <pose>0 0.08 0.023 0 0 0</pose>
-        <geometry><mesh><uri>model://turtlebot3_common/meshes/wheels/left_tire.stl</uri><scale>0.001 0.001 0.001</scale></mesh></geometry>
+        <geometry>
+          <mesh><uri>model://turtlebot3_common/meshes/wheels/left_tire.stl</uri><scale>0.001 0.001 0.001</scale></mesh>
+        </geometry>
       </visual>
     </link>
 
@@ -222,7 +221,10 @@
       <inertial>
         <pose>0 -0.08 0.023 -1.57 0 0</pose>
         <mass>0.1</mass>
-        <inertia><ixx>5.445e-05</ixx><iyy>5.445e-05</iyy><izz>1.089e-04</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+        <inertia>
+          <ixx>5.445e-05</ixx><iyy>5.445e-05</iyy><izz>1.089e-04</izz>
+          <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz>
+        </inertia>
       </inertial>
       <collision name="wheel_right_collision">
         <pose>0 -0.08 0.023 -1.57 0 0</pose>
@@ -234,13 +236,18 @@
       </collision>
       <visual name="wheel_right_visual">
         <pose>0 -0.08 0.023 0 0 0</pose>
-        <geometry><mesh><uri>model://turtlebot3_common/meshes/wheels/right_tire.stl</uri><scale>0.001 0.001 0.001</scale></mesh></geometry>
+        <geometry>
+          <mesh><uri>model://turtlebot3_common/meshes/wheels/right_tire.stl</uri><scale>0.001 0.001 0.001</scale></mesh>
+        </geometry>
       </visual>
     </link>
 
     <link name='caster_back_link'>
       <pose>-0.081 0 -0.004 -1.57 0 0</pose>
-      <inertial><mass>0.005</mass><inertia><ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia></inertial>
+      <inertial>
+        <mass>0.005</mass>
+        <inertia><ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
       <collision name='collision'>
         <geometry><sphere><radius>0.005</radius></sphere></geometry>
         <surface><contact><ode><kp>1e5</kp><kd>1</kd></ode></contact></surface>
@@ -284,4 +291,3 @@
 
   </model>
 </sdf>
-
